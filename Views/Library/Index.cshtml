@@ -1,0 +1,30 @@
+@model ABCBookstore.Models.BookModel
+@{
+    ViewData["Title"] = "Library";
+}
+<div class="col-12">
+    <div class="row">
+        <a class="btn btn-success text-white" role="button" asp-action="AddBook">Add Book</a>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Publisher</th>
+                    <th>Publish Date</th>
+                    <th>Category</th>
+                    <th>Pages</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="8">No Data</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
