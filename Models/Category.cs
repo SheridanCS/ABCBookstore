@@ -2,6 +2,6 @@ namespace ABCBookstore.Models
 {
     public enum Category
     {
-        Children, Comics, Drama, Games, Health, Journal, Poetry, SciFi
+        Children, Comics, Drama, Fantasy, Games, Health, Journal, Poetry, SciFi
     }
 }

@@ -1,20 +1,17 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ABCBookstore.Models
 {
-    public static class BookRepository
+    public class BookRepository : IBookRepository
     {
-        private static List<BookModel> books = new List<BookModel>();
-        
-        public static IEnumerable<BookModel> Books {
-            get {
-                return books;
-            }
-        }
-        
-        public static void AddBook(BookModel book)
+        private ApplicationDbContext context;
+        private static List<Book> books = new List<Book>();
+
+        public BookRepository(ApplicationDbContext ctx)
         {
-            books.Add(book);
+            context = ctx;
         }
+        public IQueryable<Book> Books => context.Books;
     }
 }

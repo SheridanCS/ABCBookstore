@@ -5,11 +5,14 @@ namespace ABCBookstore.Controllers
 {
     public class LibraryController : Controller
     {
-        public IActionResult Index()
+        private IBookRepository bookRepository;
+
+        public LibraryController(IBookRepository repository)
         {
-            var booksList = BookRepository.Books;
-            return View("Index", booksList);
+            bookRepository = repository;
         }
+
+        public ViewResult Index() => View(bookRepository.Books);
 
         [HttpGet]
         public IActionResult AddBook()
@@ -18,11 +21,19 @@ namespace ABCBookstore.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddBook(BookModel book)
+        public IActionResult AddBook(Book book)
         {
-            BookRepository.AddBook(book);
-            var booksList = BookRepository.Books;
-            return View("Index", booksList);
+            // if (ModelState.IsValid)
+            // {
+            // BookRepository.AddBook(book);
+            // var booksList = BookRepository.Books;
+            // return View("Index", booksList);
+            // }
+            // else
+            // {
+            //     return View();
+            // }
+            return View();
         }
 
         public IActionResult FindBook()
