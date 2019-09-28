@@ -23,17 +23,14 @@ namespace ABCBookstore.Controllers
         [HttpPost]
         public IActionResult AddBook(Book book)
         {
-            // if (ModelState.IsValid)
-            // {
-            // BookRepository.AddBook(book);
-            // var booksList = BookRepository.Books;
-            // return View("Index", booksList);
-            // }
-            // else
-            // {
-            //     return View();
-            // }
-            return View();
+            if (ModelState.IsValid)
+            {
+                this.bookRepository.AddBook(book);
+                return RedirectToAction("Index");
+            } else
+            {
+                return View();
+            }
         }
 
         public IActionResult FindBook()
@@ -41,14 +38,35 @@ namespace ABCBookstore.Controllers
             return View();
         }
 
-        public IActionResult EditBook()
+        [HttpGet]
+        [Route("Details/{id:guid}")]
+        public IActionResult Details([FromRoute] string id)
         {
-            return View();
+            Book book = bookRepository.FindById(id);
+            return View(book);
         }
 
-        public IActionResult DeleteBook()
+        [HttpPost]
+        [Route("Details/{id:guid}")]
+        public IActionResult EditBook(Book book)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                this.bookRepository.UpdateBook(book);
+                return RedirectToAction(nameof(Index));
+            } else
+            {
+                return View(book);
+            }
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteBook(string bookId)
+        {
+            this.bookRepository.DeleteBookById(bookId);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
