@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ABCBookstore.Models;
+using System.Diagnostics;
+using System.Linq;
 
 namespace ABCBookstore.Controllers
 {
@@ -14,6 +16,19 @@ namespace ABCBookstore.Controllers
 
         public ViewResult Index() => View(bookRepository.Books);
 
+        [HttpPost]
+        public ViewResult Index(string searchBy, SearchType type)
+        {
+            if (string.IsNullOrEmpty(searchBy))
+                return View(bookRepository.Books);
+
+            var books = bookRepository.FindBook(searchBy, type);
+            if (books == null)
+                return View(Enumerable.Empty<Book>().AsQueryable());
+
+            return View(books);
+        }
+
         [HttpGet]
         public IActionResult AddBook()
         {
@@ -27,16 +42,20 @@ namespace ABCBookstore.Controllers
             {
                 this.bookRepository.AddBook(book);
                 return RedirectToAction("Index");
-            } else
-            {
-                return View();
-            }
-        }
+            } 
 
-        public IActionResult FindBook()
-        {
             return View();
         }
+
+
+        //[HttpPost]
+        //[Route("FindBook/{searchString:string}")]
+        //public IActionResult FindBook([FromRoute] string searchString)
+        //{
+        //    var books = this.bookRepository.FindBook(searchString);
+        //    return View(books);
+        //}
+
 
         [HttpGet]
         [Route("Details/{id:guid}")]

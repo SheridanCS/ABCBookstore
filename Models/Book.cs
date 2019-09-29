@@ -13,7 +13,12 @@ namespace ABCBookstore.Models
     {
         Canadian, International
     }
-
+    public enum SearchType
+    {
+        Title,
+        Category,
+        Price
+    }
     public class Book
     {
         public String BookId { get; set; }

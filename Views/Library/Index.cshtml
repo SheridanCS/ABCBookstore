@@ -2,7 +2,22 @@
     ViewData["Title"] = "Library";
 }
 @model IEnumerable<Book>
-    
+@using (Html.BeginForm("", "Library", FormMethod.Post))
+{
+
+    <p>
+        <select name="type">
+            <option value="0">Title</option>
+            <option value="1">Category</option>
+            <option value="2">Price</option>
+        </select>
+        <input type="text" name="searchBy" />
+        <input type="submit" value="Search" />
+    </p>
+
+}
+
+
 <div class="col-12">
     <div class="row">
         <table class="table">

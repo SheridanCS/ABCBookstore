@@ -8,5 +8,6 @@ namespace ABCBookstore.Models
         void AddBook(Book book);
         void UpdateBook(Book book);
         int DeleteBookById(string bookId);
+        IQueryable<Book> FindBook(string searchString, SearchType type);
     }
 }
