@@ -2,7 +2,29 @@
     ViewData["Title"] = "Library";
 }
 @model IEnumerable<Book>
-    
+
+
+<div class="container">
+    <main class="pb-3" role="main">
+        <form action="/library" method="post">
+            <div class="row">
+                <div class="col">
+                    <select class="form-control form-control-sm" name="type">
+                        <option value="0">Title</option>
+                        <option value="1">Category</option>
+                        <option value="2">Price</option>
+                    </select>
+                </div>
+                <div class="col">
+                    <input class="form-control form-control-sm" name="searchBy" />
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary btn-sm" type ="submit" >Search</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
 <div class="col-12">
     <div class="row">
         <table class="table">
